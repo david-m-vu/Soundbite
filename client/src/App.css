@@ -1,0 +1,18 @@
+.App {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: rgb(134, 134, 134);
+}
+
+
+.connectSpotify {
+  
+  margin: 10px;
+}
+
+#gptInput {
+  margin: 10px;
+  padding: 10px;
+}
+
