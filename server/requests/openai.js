@@ -1,5 +1,6 @@
 
 import { Configuration, OpenAIApi } from "openai";
+import { parseLineSeparatedList } from "../util/parseText.js";
 
 class OpenAI {
   constructor(apiKey) {
@@ -27,8 +28,8 @@ class OpenAI {
         temperature
       });
 
-      console.log(response.data.choices[0].message.content);
-      return response.data.choices[0].message.content;
+      let content = response.data.choices[0].message.content;
+      return parseLineSeparatedList(content);
 
     } catch (err) {
       console.log(err.message);

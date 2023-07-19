@@ -1,5 +1,5 @@
-import spotifyRoutes from "./routes/spotify.js";
-import openaiRoutes from "./routes/openai.js";
+import spotifyAuthRoutes from "./routes/spotifyAuth.js";
+import recommendationsRoutes from "./routes/recommendations.js";
 
 import express from "express";
 import bodyParser from "body-parser";
@@ -28,8 +28,8 @@ app.use("/assets", express.static(path.join(__dirname, "public/assets")));
 
 
 /* ROUTES */
-app.use("/spotify", spotifyRoutes);
-app.use("/openai", openaiRoutes);
+app.use("/spotify", spotifyAuthRoutes);
+app.use("/recommendations", recommendationsRoutes);
 
 app.get("/", (req, res) => {
     res.json({"bro": "bro"});
