@@ -9,7 +9,7 @@ export const loginSpotify = (req, res) => {
     const client_id = process.env.SPOTIFY_CLIENT_ID;
 
     const state = "idontknow";
-    const scope = 'user-read-private user-read-email playlist-modify-public streaming';
+    const scope = 'user-read-private user-read-email playlist-modify-public playlist-modify-private streaming user-modify-playback-state';
 
     res.redirect('https://accounts.spotify.com/authorize?' +
         querystring.stringify({

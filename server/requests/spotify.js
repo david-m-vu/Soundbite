@@ -1,8 +1,8 @@
 const spotifyBaseURL = "https://api.spotify.com/v1";
 import fetch from "node-fetch";
 
-export const getTrackURIs = async (access_token, songList) => {  
-    let trackURIs = [];
+export const getTracksInfo = async (access_token, songList) => {  
+    let tracksInfo = [];
     for (let i = 0; i < songList.length; i++) {
         try {
             const response = await fetch(`${spotifyBaseURL}/search?q=${songList[i]}&type=track`, {
@@ -13,7 +13,12 @@ export const getTrackURIs = async (access_token, songList) => {
 
             if (response.ok) {
                 let responseJSON = await response.json();
-                trackURIs.push(responseJSON.tracks.items[0].uri);
+                let cover = responseJSON.tracks.items[0].album.images[0].url;
+                let trackName = responseJSON.tracks.items[0].name;
+                let artist = responseJSON.tracks.items[0].artists[0].name;
+                let uri = responseJSON.tracks.items[0].uri;
+
+                tracksInfo.push({cover, trackName, artist, uri});
             }
 
         } catch (err) {
@@ -21,7 +26,7 @@ export const getTrackURIs = async (access_token, songList) => {
         } 
     }
 
-    return trackURIs;
+    return tracksInfo;
 }
 
 export const getUserID = async (access_token) => {
@@ -47,6 +52,7 @@ export const createPlaylist = async (access_token, userID, playlistName) => {
             method: "POST",
             body: JSON.stringify({
                 name: playlistName,
+                public: false
             }),
             headers: {
                 "Authorization": `Bearer ${access_token}`
@@ -63,12 +69,14 @@ export const createPlaylist = async (access_token, userID, playlistName) => {
     }
 }
 
-export const updatePlaylist = async (access_token, playlistID, trackURIs) => {
+export const updatePlaylist = async (access_token, playlistID, tracksInfo) => {
     try {
         let response = await fetch(`${spotifyBaseURL}/playlists/${playlistID}/tracks`, {
             method: "PUT",
             body: JSON.stringify({
-                uris: trackURIs
+                uris: tracksInfo.map((info) => {
+                    return info.uri;
+                })
             }),
             headers: {
                 "Authorization": `Bearer ${access_token}`

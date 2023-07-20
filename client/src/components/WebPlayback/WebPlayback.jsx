@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { play, transferPlaybackHere} from "../../requests/spotify.js"
 import "./WebPlayback.css";
 
 const track = {
@@ -18,6 +19,7 @@ const WebPlayback = (props) => {
     const [is_paused, setPaused] = useState(false);
     const [is_active, setActive] = useState(false);
     const [current_track, setTrack] = useState(track);
+
 
     useEffect(() => {
 
@@ -39,6 +41,10 @@ const WebPlayback = (props) => {
 
             player.addListener('ready', ({ device_id }) => {
                 console.log('Ready with Device ID', device_id);
+                if (props.playlistURI) {
+                    play(props.token, device_id, props.playlistURI);
+                    // transferPlaybackHere(props.token, device_id);
+                }
             });
 
             player.addListener('not_ready', ({ device_id }) => {
@@ -46,10 +52,11 @@ const WebPlayback = (props) => {
             });
 
             player.addListener('player_state_changed', (state => {
-
                 if (!state) {
                     return;
                 }
+                console.log(state);
+
 
                 setTrack(state.track_window.current_track);
                 setPaused(state.paused);
@@ -60,34 +67,16 @@ const WebPlayback = (props) => {
 
             }));
 
-            // player._options.getOAuthToken((token) => {
-            //     fetch(`https://api.spotify.com/v1/me/player/play?device_id=${player._options.id}`, {
-            //       method: 'PUT',
-            //       headers: {
-            //         'Authorization': `Bearer ${props.token}`,
-            //         'Content-Type': 'application/json'
-            //       },
-            //       body: JSON.stringify({
-            //         context_uri: props.playlistURI
-            //       })
-            //     }).then(() => {
-            //       console.log('Playlist playback initiated.');
-            //     }).catch((error) => {
-            //       console.error('Error starting playlist playback:', error);
-            //     });
-            //   });
-
-            
-
             player.connect();
-
         };
+
+
     }, []);
 
     if (!is_active) {
         return (
             <>
-                <div className="container">
+                <div className="WebPlayback">
                     <div className="main-wrapper">
                         <b> Instance not active. Transfer your playback using your Spotify app </b>
                     </div>
@@ -96,7 +85,7 @@ const WebPlayback = (props) => {
     } else {
         return (
             <>
-                <div className="container">
+                <div className="WebPlayback">
                     <div className="main-wrapper">
 
                         <img src={current_track.album.images[0].url} className="now-playing__cover" alt="" />

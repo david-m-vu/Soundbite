@@ -1,0 +1,16 @@
+.Playlist {
+    background-color: rgb(48, 3, 3);
+    color: white;
+    padding: 20px;
+    margin: 10px;
+}
+
+.track > img {
+    width: 100px;
+    height: 100px;
+}
+
+.track {
+    display: flex;
+    margin: 5px;
+}
