@@ -1,16 +1,45 @@
 .Playlist {
-    background-color: rgb(48, 3, 3);
+    height: 100%;
     color: white;
     padding: 20px;
-    margin: 10px;
+    overflow-y: scroll;
 }
 
-.track > img {
-    width: 100px;
-    height: 100px;
-}
-
-.track {
+.inactiveTrack, .activeTrack {
     display: flex;
     margin: 5px;
+    justify-content: space-between;
+}
+
+.inactiveTrack:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.activeTrack {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+
+.songInfo {
+    display: flex;
+}
+.songInfo > img {
+    width: 80px;
+    height: 80px;
+    padding: 10px;
+}
+
+
+.trackInfo {
+    padding: 10px;
+}
+
+.play {
+    display: flex;
+    align-items: center;
+}
+
+::-webkit-scrollbar {
+    width: 0px;
+    background: transparent;
 }

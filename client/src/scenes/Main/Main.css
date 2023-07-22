@@ -1,0 +1,117 @@
+.Main {
+    display: grid;
+    grid-template-areas: 
+        "side top"
+        "side playing"
+        "playback playback";
+    
+    grid-template-rows: 80px 9fr 1fr;
+    grid-template-columns: 250px 1fr;
+    height: 100%;
+    background-color: rgb(82, 82, 82);
+    color: white;
+  }
+
+  .top {
+    grid-area: top;
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-bottom: solid black 1px;
+    justify-content: space-between;
+  }
+
+  .generatePlaylistButton {
+    font-size: 1.5em;
+    padding: 10px;
+    border-radius: 20px;
+    border: none;
+    color: white;
+    background-color: black;
+  }
+  
+  .generatePlaylistButton:hover {
+    cursor: pointer;
+  }
+
+  .chatOverlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 50%;
+    height: 50%;
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.8);
+  }
+  
+  .inputs {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  .activity, .duration {
+    display: flex;
+    align-items: center;
+  }
+  
+  #activityInput, #durationInput {
+    margin: 10px;
+    padding: 10px;
+  }
+
+  .submitButton {
+    margin: 10px;
+  }
+
+  .closeButton {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+  }
+
+  .closeButton:hover {
+    cursor: pointer;
+  }
+  
+  .connectSpotify {
+    margin: 10px;
+  }
+
+  .playlistList {
+    grid-area: side;
+    background-color: rgb(49, 49, 49);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+  }
+
+  .playlistList > p {
+    padding: 5px;
+  }
+
+  .inactivePlaylistLabel {
+    opacity: 0.8;
+  }
+
+  .activePlaylistLabel {
+    opacity: 1;
+  }
+
+  .playlistList > p:hover {
+    cursor: pointer;
+  }
+
+  .playlistTracks {
+    grid-area: playing;
+    height: 100%;
+    overflow-y: scroll;
+  }
+  
+  .playback {
+    grid-area: playback;
+    background-color: black;
+  }

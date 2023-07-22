@@ -1,8 +1,8 @@
 const spotifyBaseURL = "https://api.spotify.com/v1";
 import fetch from "node-fetch";
 
-export const getTracksInfo = async (access_token, songList) => {  
-    let tracksInfo = [];
+export const getTracks = async (access_token, songList) => {  
+    let tracks = [];
     for (let i = 0; i < songList.length; i++) {
         try {
             const response = await fetch(`${spotifyBaseURL}/search?q=${songList[i]}&type=track`, {
@@ -18,7 +18,7 @@ export const getTracksInfo = async (access_token, songList) => {
                 let artist = responseJSON.tracks.items[0].artists[0].name;
                 let uri = responseJSON.tracks.items[0].uri;
 
-                tracksInfo.push({cover, trackName, artist, uri});
+                tracks.push({cover, trackName, artist, uri});
             }
 
         } catch (err) {
@@ -26,7 +26,7 @@ export const getTracksInfo = async (access_token, songList) => {
         } 
     }
 
-    return tracksInfo;
+    return tracks;
 }
 
 export const getUserID = async (access_token) => {

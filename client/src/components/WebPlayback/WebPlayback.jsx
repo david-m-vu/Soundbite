@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { play, transferPlaybackHere} from "../../requests/spotify.js"
+import { resume, pause, skipNext, skipPrev} from "../../requests/spotify.js"
 import "./WebPlayback.css";
 
 const track = {
@@ -19,7 +19,15 @@ const WebPlayback = (props) => {
     const [is_paused, setPaused] = useState(false);
     const [is_active, setActive] = useState(false);
     const [current_track, setTrack] = useState(track);
-
+    const [deviceID, setDeviceID] = useState("");
+    
+    const playOrPause = () => {
+        if (is_paused) {
+            resume(props.token, deviceID)
+        } else {
+            pause(props.token, deviceID);
+        }
+    }
 
     useEffect(() => {
 
@@ -41,10 +49,8 @@ const WebPlayback = (props) => {
 
             player.addListener('ready', ({ device_id }) => {
                 console.log('Ready with Device ID', device_id);
-                if (props.playlistURI) {
-                    play(props.token, device_id, props.playlistURI);
-                    // transferPlaybackHere(props.token, device_id);
-                }
+                props.setDeviceID(device_id);
+                setDeviceID(device_id);
             });
 
             player.addListener('not_ready', ({ device_id }) => {
@@ -55,8 +61,6 @@ const WebPlayback = (props) => {
                 if (!state) {
                     return;
                 }
-                console.log(state);
-
 
                 setTrack(state.track_window.current_track);
                 setPaused(state.paused);
@@ -73,12 +77,12 @@ const WebPlayback = (props) => {
 
     }, []);
 
-    if (!is_active) {
+    if (!is_active || !current_track) {
         return (
             <>
                 <div className="WebPlayback">
                     <div className="main-wrapper">
-                        <b> Instance not active. Transfer your playback using your Spotify app </b>
+                        <b> Instance not active </b>
                     </div>
                 </div>
             </>)
@@ -88,21 +92,21 @@ const WebPlayback = (props) => {
                 <div className="WebPlayback">
                     <div className="main-wrapper">
 
-                        <img src={current_track.album.images[0].url} className="now-playing__cover" alt="" />
+                        {/* <img src={current_track.album.images[0].url} className="now-playing__cover" alt="" /> */}
 
                         <div className="now-playing__side">
                             <div className="now-playing__name">{current_track.name}</div>
                             <div className="now-playing__artist">{current_track.artists[0].name}</div>
                             <div className="playbackButtons">
-                                <button className="btn-spotify" onClick={() => { player.previousTrack() }} >
+                                <button className="btn-spotify" onClick={() => { skipPrev(props.token, deviceID) }} >
                                     &lt;&lt;
                                 </button>
 
-                                <button className="btn-spotify" onClick={() => { player.togglePlay() }} >
+                                <button className="btn-spotify" onClick={() => { playOrPause() }} >
                                     {is_paused ? "PLAY" : "PAUSE"}
                                 </button>
 
-                                <button className="btn-spotify" onClick={() => { player.nextTrack() }} >
+                                <button className="btn-spotify" onClick={() => { skipNext(props.token, deviceID) }} >
                                     &gt;&gt;
                                 </button>
                             </div>

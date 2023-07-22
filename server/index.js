@@ -1,5 +1,6 @@
 import spotifyAuthRoutes from "./routes/spotifyAuth.js";
 import recommendationsRoutes from "./routes/recommendations.js";
+import authRoutes from "./routes/auth.js";
 
 import express from "express";
 import bodyParser from "body-parser";
@@ -30,6 +31,7 @@ app.use("/assets", express.static(path.join(__dirname, "public/assets")));
 /* ROUTES */
 app.use("/spotify", spotifyAuthRoutes);
 app.use("/recommendations", recommendationsRoutes);
+app.use("/auth", authRoutes);
 
 app.get("/", (req, res) => {
     res.json({"bro": "bro"});
