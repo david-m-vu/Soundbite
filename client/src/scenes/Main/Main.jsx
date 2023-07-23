@@ -106,15 +106,7 @@ const Main = (props) => {
 
   return (
     <div className="Main">
-      <div className="connectOverlay overlay">
-        {props.spotifyToken === "" && (
-          <a href={`${backendBaseURL}/spotify/login`}>
-            <button className="connectSpotify">Connect to Spotify</button>
-          </a>
-        )}
-      </div>
-      {props.spotifyToken === "" && <div className="backgroundOverlay"></div>}
-
+      
       <div className="playlistList">
         {user.playlists.map((playlist, index) => {
           return (
@@ -202,6 +194,11 @@ const Main = (props) => {
             activeSongIndex={activeSongIndex}
             setDeviceID={setDeviceID}
           />
+        )}
+          {props.spotifyToken === "" && (
+          <a href={`${backendBaseURL}/spotify/login`}>
+            <button className="connectSpotify">Connect to Spotify</button>
+          </a>
         )}
       </div>
     </div>
