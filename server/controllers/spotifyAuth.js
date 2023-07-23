@@ -1,7 +1,8 @@
 import querystring from "querystring";
 import fetch from "node-fetch";
 
-const redirect_uri = 'http://localhost:3001/spotify/callback';
+const redirect_uri = 'https://soundbite-backend.onrender.com/spotify/callback';
+const frontendURL = "http://localhost:3000/main"
 let access_token = "";
 
 export const loginSpotify = (req, res) => {
@@ -51,10 +52,7 @@ export const getAccessToken = async (req, res) => {
             let responseJSON = await response.json();
             access_token = responseJSON.access_token;
 
-            // const token = jwt.sign({ access_token: access_token }, process.env.JWT_SECRET);
-
-            // res.redirect(`http://localhost:3000/?access_token=${access_token}`);
-            res.redirect(`http://localhost:3000/main`);
+            res.redirect(`${frontendURL}`);
         }
 
     } catch (err) {

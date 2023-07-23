@@ -6,7 +6,7 @@ import Playlist from "../../components/Playlist/Playlist.jsx";
 import CloseIcon from "@mui/icons-material/Close";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { setPlaylists } from "../../state/index.js";
+import { setPlaylists, setLogout } from "../../state/index.js";
 
 const backendBaseURL = "https://soundbite-backend.onrender.com";
 
