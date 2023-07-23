@@ -1,6 +1,5 @@
 import querystring from "querystring";
 import fetch from "node-fetch";
-import jwt from "jsonwebtoken";
 
 const redirect_uri = 'http://localhost:3001/spotify/callback';
 let access_token = "";
@@ -55,7 +54,7 @@ export const getAccessToken = async (req, res) => {
             // const token = jwt.sign({ access_token: access_token }, process.env.JWT_SECRET);
 
             // res.redirect(`http://localhost:3000/?access_token=${access_token}`);
-            res.redirect(`http://localhost:3000/`);
+            res.redirect(`http://localhost:3000/main`);
         }
 
     } catch (err) {

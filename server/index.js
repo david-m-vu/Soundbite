@@ -1,6 +1,7 @@
 import spotifyAuthRoutes from "./routes/spotifyAuth.js";
 import recommendationsRoutes from "./routes/recommendations.js";
 import authRoutes from "./routes/auth.js";
+import usersRoutes from "./routes/users.js";
 
 import express from "express";
 import bodyParser from "body-parser";
@@ -22,7 +23,7 @@ dotenv.config();
 const app = express();
 app.use(express.json());
 app.use(morgan("common"));
-app.use(bodyParser.json({limit: "30mb", extended: true}));
+app.use(bodyParser.json({ limit: "30mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
 app.use(cors());
 app.use("/assets", express.static(path.join(__dirname, "public/assets")));
@@ -32,6 +33,7 @@ app.use("/assets", express.static(path.join(__dirname, "public/assets")));
 app.use("/spotify", spotifyAuthRoutes);
 app.use("/recommendations", recommendationsRoutes);
 app.use("/auth", authRoutes);
+app.use("/users", usersRoutes);
 
 app.get("/", (req, res) => {
     res.json({"bro": "bro"});

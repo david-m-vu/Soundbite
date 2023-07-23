@@ -5,13 +5,12 @@ import WebPlayback from "../../components/WebPlayback/WebPlayback.jsx";
 import Playlist from "../../components/Playlist/Playlist.jsx";
 import CloseIcon from "@mui/icons-material/Close";
 import { useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { setPlaylists } from "../../state/index.js";
 
 const Main = (props) => {
   const [activityInput, setActivityInput] = useState("");
   const [durationInput, setDurationInput] = useState("");
-
-  const [playlists, setPlaylists] = useState([]); // array of objects with playlistName, playlistURI, and an array of tracks
-  
   const [activePlaylist, setActivePlaylist] = useState(null); // element of playlists
   const [activePlaylistIndex, setActivePlaylistIndex] = useState(-1);
   const [activeSongIndex, setActiveSongIndex] = useState(-1);
@@ -19,7 +18,21 @@ const Main = (props) => {
 
   const [isAddingPlaylist, setIsAddingPlaylist] = useState(false);
 
+  const user = useSelector((state) => state.user);
+  const token = useSelector((state) => state.token);
+
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  // const getUser = async () => {
+  //   const response = await fetch(`http://localhost:3001/users/${user._id}`, {
+  //     headers: {
+  //       "Authorization": `Bearer ${token}`
+  //     }
+  //   });
+  //   const data = await response.json();
+  //   setUser(data);
+  // }
 
   const handleActivityInputChange = (e) => {
     setActivityInput(e.target.value);
@@ -30,26 +43,48 @@ const Main = (props) => {
   };
 
   const handleSubmitGPTInput = async () => {
-    if (activityInput && props.token) {
-      let { playlistURI, playlistName, tracks } =
-      await generateGPTRecPlaylist(props.token, activityInput, durationInput);
-      setPlaylists((prev) => [...prev, { playlistURI, playlistName, tracks }]);
-      setActivePlaylist({ playlistURI, playlistName, tracks });
+    if (activityInput && props.spotifyToken) {
+      if (durationInput === "") {
+        setDurationInput("1");
+      }
+      let newPlaylist = await generateGPTRecPlaylist(
+        user._id,
+        token,
+        props.spotifyToken,
+        activityInput,
+        durationInput
+      );
 
+      setActivePlaylist(newPlaylist);
       setActivityInput("");
       setDurationInput("");
       setIsAddingPlaylist(false);
-    } else if (!props.token) {
+
+      dispatch(setPlaylists({ playlists: [...user.playlists, newPlaylist] }));
+    } else if (!props.spotifyToken) {
       console.log("No access token");
     }
   };
 
+  const handleDeletePlaylist = async (playlistID) => {
+    let response = await fetch(`http://localhost:3001/users/${user._id}/playlists/${playlistID}`, {
+      method: "DELETE",
+      headers: {
+        "Authorization": `Bearer ${token}`
+      }
+    })
+
+    let newPlaylists = await response.json();
+    setActivePlaylist(null)
+    dispatch(setPlaylists({ playlists: newPlaylists}));    
+  }
+
   const selectPlaylist = (index) => {
     setActivePlaylistIndex(index);
-    setActivePlaylist(playlists[index])
-    
+    setActivePlaylist(user.playlists[index]);
+
     setActiveSongIndex(-1);
-  }
+  };
 
   const getPlaylistLabelClassName = (index) => {
     if (index === activePlaylistIndex) {
@@ -57,15 +92,36 @@ const Main = (props) => {
     } else {
       return "inactivePlaylistLabel";
     }
-  }
+  };
 
   return (
     <div className="Main">
-      {props.token === "" && (
-        <a href="http://localhost:3001/spotify/login">
-          <button className="connectSpotify">Connect to Spotify</button>
-        </a>
-      )}
+      <div className="connectOverlay overlay">
+        {props.spotifyToken === "" && (
+          <a href="http://localhost:3001/spotify/login">
+            <button className="connectSpotify">Connect to Spotify</button>
+          </a>
+        )}
+      </div>
+      {props.spotifyToken === "" && <div className="backgroundOverlay"></div>}
+
+      <div className="playlistList">
+        {user.playlists.map((playlist, index) => {
+          return (
+            <div key={playlist.uri} className="playlistListItem">
+              <p
+                className={getPlaylistLabelClassName(index)}
+                onClick={() => selectPlaylist(index)}
+              >
+                {playlist.name}
+              </p>
+              <div className="deletePlaylistButton"> 
+                <CloseIcon onClick={() => handleDeletePlaylist(playlist._id)} />
+              </div>
+            </div>
+          );
+        })}
+      </div>
 
       <div className="top">
         <button
@@ -74,13 +130,14 @@ const Main = (props) => {
         >
           Generate new playlist
         </button>
+        <h1>User: {user.firstName}</h1>
         <button className="toSignIn" onClick={() => navigate("../")}>
-          Login
+          {props.isAuth ? "Sign Out" : "Login"}
         </button>
       </div>
 
       {isAddingPlaylist && (
-        <div className="chatOverlay">
+        <div className="chatOverlay overlay">
           <div className="inputs">
             <div className="activity">
               <label htmlFor="activityInput">Input a Mood/Activity</label>
@@ -107,7 +164,7 @@ const Main = (props) => {
             </button>
           </div>
           <div
-            className="closeButton"
+            className="closeChatButton"
             onClick={() => setIsAddingPlaylist(false)}
           >
             <CloseIcon fontSize="large" />
@@ -116,16 +173,10 @@ const Main = (props) => {
       )}
       {isAddingPlaylist && <div className="backgroundOverlay"></div>}
 
-      <div className="playlistList">
-        {playlists.map((playlist, index) => {
-          return <p key={playlist.playlistURI} className={getPlaylistLabelClassName(index)} onClick={() => selectPlaylist(index)}>{playlist.playlistName}</p>;
-        })}
-      </div>
-
       {activePlaylist && (
         <div className="playlistTracks">
           <Playlist
-            token={props.token}
+            token={props.spotifyToken}
             activePlaylist={activePlaylist}
             activeSongIndex={activeSongIndex}
             setActiveSongIndex={setActiveSongIndex}
@@ -135,15 +186,14 @@ const Main = (props) => {
       )}
 
       <div className="playback">
-        {props.token && (
+        {props.spotifyToken && (
           <WebPlayback
-            token={props.token}
+            token={props.spotifyToken}
             activeSongIndex={activeSongIndex}
             setDeviceID={setDeviceID}
           />
         )}
       </div>
-
     </div>
   );
 };

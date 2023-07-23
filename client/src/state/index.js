@@ -19,7 +19,7 @@ export const authSlice = createSlice({
             state.token = null;
         },
         setPlaylists: (state, action) => {
-            state.playlists = action.payload.playlists;
+            state.user.playlists = action.payload.playlists;
         },
         setPlaylist: (state, action) => {
             const updatedPlaylists = state.playlists.map((playlist) => {

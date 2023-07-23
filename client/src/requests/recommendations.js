@@ -1,22 +1,36 @@
 const baseURL = "http://localhost:3001"
 
-export const generateGPTRecPlaylist = async (access_token, activityInput, durationInput) => {
-    const response = await fetch(`${baseURL}/recommendations`, {
+export const generateGPTRecPlaylist = async (userID, token, spotifyToken, activityInput, durationInput) => {    
+    const gptResponse = await fetch(`${baseURL}/recommendations/ask`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
         },
         body: JSON.stringify({
-            "activity": activityInput,
-            "duration": durationInput,
-            "access_token": access_token
+            activity: activityInput,
+            duration: durationInput
+        })
+    })
+
+    const gptRec = (await gptResponse.json()).context;
+    
+    const playlistResponse = await fetch(`${baseURL}/recommendations/add/${userID}`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+        },
+        body: JSON.stringify({
+            recommendation: gptRec,
+            spotifyToken,
+            playlistName: activityInput
         }),
     })
 
-    if (response.ok) {
-        const responseJSON = await response.json();
+    if (playlistResponse.ok) {
+        const playlist = await playlistResponse.json();
         return {
-            ...responseJSON
+            ...playlist
         };
     }
 }

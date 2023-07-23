@@ -1,6 +1,6 @@
 
 import { Configuration, OpenAIApi } from "openai";
-import { parseLineSeparatedList } from "../util/parseText.js";
+// import { parseLineSeparatedList } from "../util/parseText.js";
 
 class OpenAI {
   constructor(apiKey) {
@@ -30,7 +30,7 @@ class OpenAI {
 
       let content = response.data.choices[0].message.content;
       console.log(content);
-      return parseLineSeparatedList(content);
+      return content
 
     } catch (err) {
       console.log(err.message);

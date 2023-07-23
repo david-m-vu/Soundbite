@@ -5,6 +5,10 @@ const playlistSchema = mongoose.Schema(
         name: {
             type: String
         },
+        spotifyID: {
+            type: String,
+            required: true
+        },
         uri: {
             type: String,
             required: true
