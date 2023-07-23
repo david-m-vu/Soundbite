@@ -36,7 +36,7 @@ app.use("/auth", authRoutes);
 app.use("/users", usersRoutes);
 
 app.get("/", (req, res) => {
-    res.json({"bro": "bro"});
+    res.json({"running": "true"});
 })
 
 

@@ -1,7 +1,7 @@
-const baseURL = "http://localhost:3001"
+const backendBaseURL = "https://soundbite-backend.onrender.com"
 
 export const generateGPTRecPlaylist = async (userID, token, spotifyToken, activityInput, durationInput) => {    
-    const gptResponse = await fetch(`${baseURL}/recommendations/ask`, {
+    const gptResponse = await fetch(`${backendBaseURL}/recommendations/ask`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -14,7 +14,7 @@ export const generateGPTRecPlaylist = async (userID, token, spotifyToken, activi
 
     const gptRec = (await gptResponse.json()).context;
     
-    const playlistResponse = await fetch(`${baseURL}/recommendations/add/${userID}`, {
+    const playlistResponse = await fetch(`${backendBaseURL}/recommendations/add/${userID}`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",

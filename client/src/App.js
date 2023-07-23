@@ -5,6 +5,8 @@ import { useSelector } from "react-redux";
 import Main from "./scenes/Main/Main.jsx";
 import LoginPage from "./scenes/LoginPage/LoginPage.jsx";
 
+const backendBaseURL = "https://soundbite-backend.onrender.com"
+
 
 const App = () => {
   const [spotifyToken, setSpotifyToken] = useState("");
@@ -12,7 +14,7 @@ const App = () => {
 
   useEffect(() => {
     const getToken = async () => {
-      const response = await fetch("http://localhost:3001/spotify/token");
+      const response = await fetch(`${backendBaseURL}/spotify/token`);
       if (response.ok) {
         const json = await response.json();
         setSpotifyToken(json.access_token);

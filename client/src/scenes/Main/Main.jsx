@@ -8,6 +8,8 @@ import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { setPlaylists } from "../../state/index.js";
 
+const backendBaseURL = "https://soundbite-backend.onrender.com";
+
 const Main = (props) => {
   const [activityInput, setActivityInput] = useState("");
   const [durationInput, setDurationInput] = useState("");
@@ -67,7 +69,7 @@ const Main = (props) => {
   };
 
   const handleDeletePlaylist = async (playlistID) => {
-    let response = await fetch(`http://localhost:3001/users/${user._id}/playlists/${playlistID}`, {
+    let response = await fetch(`${backendBaseURL}/${user._id}/playlists/${playlistID}`, {
       method: "DELETE",
       headers: {
         "Authorization": `Bearer ${token}`
@@ -77,6 +79,13 @@ const Main = (props) => {
     let newPlaylists = await response.json();
     setActivePlaylist(null)
     dispatch(setPlaylists({ playlists: newPlaylists}));    
+  }
+
+  const handleClickToSignIn = () => {
+    if (user) {
+      dispatch(setLogout());
+    }
+    navigate("../")
   }
 
   const selectPlaylist = (index) => {
@@ -98,7 +107,7 @@ const Main = (props) => {
     <div className="Main">
       <div className="connectOverlay overlay">
         {props.spotifyToken === "" && (
-          <a href="http://localhost:3001/spotify/login">
+          <a href={`${backendBaseURL}/spotify/login`}>
             <button className="connectSpotify">Connect to Spotify</button>
           </a>
         )}
@@ -131,7 +140,7 @@ const Main = (props) => {
           Generate new playlist
         </button>
         <h1>User: {user.firstName}</h1>
-        <button className="toSignIn" onClick={() => navigate("../")}>
+        <button className="toSignIn" onClick={() => handleClickToSignIn()}>
           {props.isAuth ? "Sign Out" : "Login"}
         </button>
       </div>

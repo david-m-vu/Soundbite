@@ -7,7 +7,7 @@ import { useDispatch } from "react-redux";
 import { setLogin } from "../../state/index.js";
 import { TextField, Button } from "@mui/material";
 
-const authBaseURL = "http://localhost:3001/auth";
+const authBaseURL = "https://soundbite-backend.onrender.com/auth";
 
 const registerSchema = yup.object().shape({
   firstName: yup.string().required("required"),
