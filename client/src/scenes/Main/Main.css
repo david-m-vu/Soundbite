@@ -22,6 +22,10 @@
     cursor: pointer;
   }
 
+  .toSignIn:hover {
+    cursor: pointer;
+  }
+
   .playlistList {
     grid-area: side;
     background-color: rgb(49, 49, 49);

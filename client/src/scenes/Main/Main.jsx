@@ -58,6 +58,7 @@ const Main = (props) => {
       );
 
       setActivePlaylist(newPlaylist);
+      setActivePlaylistIndex(user.playlists.length)
       setActivityInput("");
       setDurationInput("");
       setIsAddingPlaylist(false);
@@ -69,7 +70,7 @@ const Main = (props) => {
   };
 
   const handleDeletePlaylist = async (playlistID) => {
-    let response = await fetch(`${backendBaseURL}/${user._id}/playlists/${playlistID}`, {
+    let response = await fetch(`${backendBaseURL}/users/${user._id}/playlists/${playlistID}`, {
       method: "DELETE",
       headers: {
         "Authorization": `Bearer ${token}`

@@ -5,7 +5,7 @@ import * as yup from "yup";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setLogin } from "../../state/index.js";
-import { TextField, Button } from "@mui/material";
+import { TextField } from "@mui/material";
 
 const authBaseURL = "https://soundbite-backend.onrender.com/auth";
 
@@ -93,6 +93,7 @@ const LoginPage = () => {
 
   return (
     <div className="LoginPage">
+      <h1>SOUNDBITE</h1>
       <Formik
         onSubmit={handleFormSubmit}
         initialValues={isRegister ? initalValuesRegister : initialValuesLogin}

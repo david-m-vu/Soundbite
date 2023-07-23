@@ -2,7 +2,7 @@ import querystring from "querystring";
 import fetch from "node-fetch";
 
 const redirect_uri = 'https://soundbite-backend.onrender.com/spotify/callback';
-const frontendURL = "http://localhost:3000/main"
+const frontendURL = "https://david-m-vu.github.io/Soundbite/main"
 let access_token = "";
 
 export const loginSpotify = (req, res) => {
