@@ -29,8 +29,8 @@ const Playlist = (props) => {
                         <div className="songInfo">
                             <img src={track.cover} alt="song cover" />
                             <div className="trackInfo">
-                                <h3>{track.trackName}</h3>
-                                <p>{track.artist}</p>
+                                <h3 className="unselectable">{track.trackName}</h3>
+                                <p className="unselectable">{track.artist}</p>
                             </div>
                         </div>
                         <div className="play">

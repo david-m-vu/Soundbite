@@ -20,6 +20,7 @@
     "mongoose": "^7.3.4",
     "morgan": "^1.10.0",
     "node-fetch": "^3.3.1",
-    "openai": "^3.3.0"
+    "openai": "^3.3.0",
+    "stripe": "^12.14.0"
   }
 }

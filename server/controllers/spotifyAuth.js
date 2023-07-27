@@ -1,8 +1,6 @@
 import querystring from "querystring";
 import fetch from "node-fetch";
 
-const redirect_uri = 'https://soundbite-backend.onrender.com/spotify/callback';
-const frontendURL = "https://david-m-vu.github.io/Soundbite/#/main"
 let access_token = "";
 
 export const loginSpotify = (req, res) => {
@@ -16,7 +14,7 @@ export const loginSpotify = (req, res) => {
             response_type: 'code',
             client_id: client_id,
             scope: scope,
-            redirect_uri: redirect_uri,
+            redirect_uri: process.env.SPOTIFY_REDIRECT_URI,
             state: state
         }));
 }
@@ -27,7 +25,7 @@ export const getAccessToken = async (req, res) => {
     try {
         const details = {
             "code": code,
-            "redirect_uri": redirect_uri,
+            "redirect_uri": process.env.SPOTIFY_REDIRECT_URI,
             "grant_type": "authorization_code"
         }
 
@@ -52,7 +50,7 @@ export const getAccessToken = async (req, res) => {
             let responseJSON = await response.json();
             access_token = responseJSON.access_token;
 
-            res.redirect(`${frontendURL}`);
+            res.redirect(`${process.env.CLIENT_URL}`);
         }
 
     } catch (err) {

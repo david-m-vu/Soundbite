@@ -1,4 +1,5 @@
-const backendBaseURL = "https://soundbite-backend.onrender.com"
+// const backendBaseURL = "https://soundbite-backend.onrender.com"
+const backendBaseURL = "http://localhost:3001";
 
 export const generateGPTRecPlaylist = async (userID, token, spotifyToken, activityInput, durationInput) => {    
     const gptResponse = await fetch(`${backendBaseURL}/recommendations/ask`, {

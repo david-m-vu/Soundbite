@@ -19,15 +19,28 @@ const UserSchema = new mongoose.Schema(
             required: true,
             min: 5
         },
+        location: String,
         playlists: {
             type: Array,
             default: []
         },
+        billingID: String,
         isPlatina: {
             type: Boolean,
             default: true
         },
-        location: String,
+        hasTrial: {
+            type: Boolean,
+            default: false
+        },
+        usedAPI: {
+            type: Number,
+            default: 0
+        },
+        endDate: {
+            type: Date,
+            default: null
+        },
     },
     { timestamps: true }
 );
