@@ -1,0 +1,55 @@
+.App {
+  background-color: #001ff3;
+  color: #ffffff;
+  overflow: hidden;
+}
+
+.inputLabel {
+    font-size: 34px;
+    font-weight: 500;
+    margin: 0;
+    padding: 0;
+  }
+
+.nextButton {
+  font-size: 42px;
+  padding: 15px 50px;
+}
+
+.disabledNextButton {
+  font-size: 42px;
+  padding: 15px 50px;
+  background-color: transparent;
+  outline: none;
+  border: 1.5px #adfca9 solid;
+  border-radius: 100px;
+  color: white;
+  opacity: 0.2;
+}
+
+.standardButton {
+  background-color: transparent;
+  outline: none;
+  border: 1.5px #adfca9 solid;
+  border-radius: 100px;
+  color: white;
+  transition: background-color 0.5s ease;
+}
+
+.standardButton:hover {
+  cursor: pointer;
+  background-color: #adfca9;
+}
+
+*.unselectable {
+  -moz-user-select: -moz-none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+
+  /*
+      Introduced in IE 10.
+      See http://ie.microsoft.com/testdrive/HTML5/msUserSelect/
+    */
+  -ms-user-select: none;
+  user-select: none;
+}

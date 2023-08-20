@@ -4,31 +4,75 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  color: white;
+  text-align: center;
 }
 
 .form {
-    display: grid;
-    gap: 10px;
+    display: flex;
+    flex-direction: column;
     justify-content: center;
     text-align: center;
+    overflow: scroll;
 }
 
-.registerForm {
+.registerForm, .loginForm {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 20px;
 }
 
-.loginForm {
+.selection {
   display: flex;
-  gap: 10px;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.formInput {
+  text-align: center;
+  color: #ADFCA9;
+  background-color: rgba(0, 0, 0, 0);
+  outline: none;
+  border: none;
+  font-size: 54px;
+  transition: font-size 0.2s ease-in, margin-bottom 0.2s ease-in;
+}
+
+.formInput:focus {
+  font-size: 84px;
+  margin-bottom: 20px;
+}
+
+
+::placeholder {
+  color: white;
+  opacity: 0.2;
+  font-weight: 700;
+}
+
+.errorMessage {
+  color: #fca9ad
+}
+
+.submitButton {
+  font-size: 42px;
+  padding: 15px 50px;
+  margin: 72px 0 20px 0;
+}
+
+.switchForm {
+  display: flex;
+  justify-content: center;
 }
 
 .changeFormTypeButton {
-    color: blue;
+  color: #ADFCA9;
 }
 
 .changeFormTypeButton:hover {
     cursor: pointer;
-    color: rgb(83, 83, 253)
+    color: rgb(91, 155, 87);
+    text-decoration: underline;
+    
 }
+

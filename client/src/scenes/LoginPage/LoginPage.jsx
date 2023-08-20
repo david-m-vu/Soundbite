@@ -5,15 +5,15 @@ import * as yup from "yup";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setLogin } from "../../state/index.js";
-import { TextField } from "@mui/material";
+import NavBar from "../../components/NavBar/NavBar.jsx";
 
 const authBaseURL = "http://localhost:3001/auth";
 
 const registerSchema = yup.object().shape({
-  firstName: yup.string().required("required"),
+  username: yup.string().required("required"),
   email: yup.string().email("invalid email").required("required"),
   password: yup.string().required("required"),
-  location: yup.string().required("required"),
+  passwordConfirmation: yup.string().required("required"),
 });
 
 const loginSchema = yup.object().shape({
@@ -22,10 +22,10 @@ const loginSchema = yup.object().shape({
 });
 
 const initalValuesRegister = {
-  firstName: "",
+  username: "",
   email: "",
   password: "",
-  location: "",
+  passwordConfirmation: "",
 };
 
 const initialValuesLogin = {
@@ -47,7 +47,7 @@ const LoginPage = () => {
     const savedUserResponse = await fetch(`${authBaseURL}/register`, {
       method: "POST",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
       },
       body: JSON.stringify(values),
     });
@@ -70,17 +70,17 @@ const LoginPage = () => {
     });
 
     const loggedIn = await loggedInResponse.json();
-    
+
     if (loggedInResponse.ok) {
-        onSubmitProps.resetForm();
-        dispatch(
+      onSubmitProps.resetForm();
+      dispatch(
         setLogin({
           user: loggedIn.user,
           token: loggedIn.token,
         })
       );
-      navigate("/main");
-    } 
+      navigate("../connect");
+    }
   };
 
   const handleFormSubmit = async (values, onSubmitProps) => {
@@ -93,7 +93,7 @@ const LoginPage = () => {
 
   return (
     <div className="LoginPage">
-      <h1>SOUNDBITE</h1>
+      <NavBar/>
       <Formik
         onSubmit={handleFormSubmit}
         initialValues={isRegister ? initalValuesRegister : initialValuesLogin}
@@ -108,67 +108,140 @@ const LoginPage = () => {
           handleSubmit,
           resetForm,
         }) => (
-          <form onSubmit={handleSubmit}>
-            <div className="form">
-              {isRegister && (
-                <div className="registerForm">
-                  {/* <label>First Name</label>
-                    <input type="text" onChange={handleChange} value={values.firstName} name="firstName" onError={Boolean(touched.firstName) && Boolean(errors.firstName)}></input> */}
-                  <TextField
-                    label="First Name"
+          <form className="form" onSubmit={handleSubmit}>
+            {isRegister ? (
+              <div className="registerForm">
+                <div className="selection">
+                  <label htmlFor="username" className="inputLabel">
+                    Pick a username
+                  </label>
+                  <input
+                    className="formInput"
+                    id="username"
+                    placeholder="my_username"
                     onBlur={handleBlur}
                     onChange={handleChange}
-                    value={values.firstName}
-                    name="firstName"
-                    error={
-                      Boolean(touched.firstName) && Boolean(errors.firstName)
-                    }
-                    helperText={touched.firstName && errors.firstName}
+                    value={values.username}
                   />
-                  <TextField
-                    label="Location"
-                    onBlur={handleBlur}
-                    onChange={handleChange}
-                    value={values.location}
-                    name="location"
-                    error={
-                      Boolean(touched.location) && Boolean(errors.location)
-                    }
-                    helperText={touched.location && errors.location}
-                  />
+                  {Boolean(touched.username) && Boolean(errors.username) && (
+                    <p className="errorMessage">{errors.username}</p>
+                  )}
                 </div>
-              )}
-              <div className="loginForm">
-                <TextField
-                  label="Email"
-                  onBlur={handleBlur}
-                  onChange={handleChange}
-                  value={values.email}
-                  name="email"
-                  error={Boolean(touched.email) && Boolean(errors.email)}
-                  helperText={touched.email && errors.email}
-                />
-                <TextField
-                  label="Password"
-                  onBlur={handleBlur}
-                  onChange={handleChange}
-                  value={values.password}
-                  name="password"
-                  error={Boolean(touched.password) && Boolean(errors.password)}
-                  helperText={touched.password && errors.password}
-                />
-              </div>
 
-              <div className="submitLogin">
-                <button type="submit">
-                  {isRegister ? "REGISTER" : "LOGIN"}
-                </button>
+                <div className="selection">
+                  <label htmlFor="email" className="inputLabel">
+                    Email
+                  </label>
+                  <input
+                    className="formInput"
+                    id="email"
+                    placeholder="example@gmail.com"
+                    onBlur={handleBlur}
+                    onChange={handleChange}
+                    value={values.email}
+                  />
+                  {Boolean(touched.email) && Boolean(errors.email) && (
+                    <p className="errorMessage">{errors.email}</p>
+                  )}
+                </div>
+
+                <div className="selection">
+                  <label htmlFor="password" className="inputLabel">
+                    Password
+                  </label>
+                  <input
+                    type="password"
+                    className="formInput"
+                    id="password"
+                    placeholder="password"
+                    onBlur={handleBlur}
+                    onChange={handleChange}
+                    value={values.password}
+                  />
+                  {Boolean(touched.password) && Boolean(errors.password) && (
+                    <p className="errorMessage">{errors.password}</p>
+                  )}
+                </div>
+
+                <div className="selection">
+                  <label htmlFor="passwordConfirmation" className="inputLabel">
+                    Confirm Password
+                  </label>
+                  <input
+                    type="password"
+                    className="formInput"
+                    id="passwordConfirmation"
+                    placeholder="confirmed password"
+                    onBlur={handleBlur}
+                    onChange={handleChange}
+                    value={values.passwordConfirmation}
+                  />
+                  {Boolean(touched.passwordConfirmation) && Boolean(errors.passwordConfirmation) && (
+                    <p className="errorMessage">
+                      {errors.passwordConfirmation}
+                    </p>
+                  )}
+                </div>
               </div>
-              <p className="changeFormTypeButton" onClick={() => {
-                setIsRegister(isRegister ? false : true)
-                resetForm();
-              }}>
-                {isRegister ? "Already have an account? Login here." : "Don't have an account? Sign Up here."}
+            ) : (
+              <div className="loginForm">
+                <div className="selection">
+                  <label htmlFor="email" className="inputLabel">
+                    Email
+                  </label>
+                  <input
+                    className="formInput"
+                    id="email"
+                    placeholder="example@gmail.com"
+                    onBlur={handleBlur}
+                    onChange={handleChange}
+                    value={values.email}
+                  />
+                  {Boolean(touched.email) && Boolean(errors.email) && (
+                    <p className="errorMessage">{errors.email}</p>
+                  )}
+                </div>
+
+                <div className="selection">
+                  <label htmlFor="password" className="inputLabel">
+                    Password
+                  </label>
+                  <input
+                    type="password"
+                    className="formInput"
+                    id="password"
+                    placeholder="password"
+                    onBlur={handleBlur}
+                    onChange={handleChange}
+                    value={values.password}
+                  />
+                  {Boolean(touched.password) && Boolean(errors.password) && (
+                    <p className="errorMessage">{errors.password}</p>
+                  )}
+                </div>
+              </div>
+            )}
+
+            <div className="submitLogin">
+              <button className="submitButton standardButton" type="submit">
+                {isRegister ? "Next" : "Login"}
+              </button>
+            </div>
+
+            <div className="switchForm">
+              {isRegister ? (
+                <p>Already have an account?&nbsp;</p>
+              ) : (
+                <p>Don't have an account?&nbsp;</p>
+              )}
+              <p
+                className="changeFormTypeButton"
+                onClick={() => {
+                  setIsRegister(isRegister ? false : true);
+                  resetForm();
+                }}
+              >
+                {isRegister ? "Login here." : "Sign Up here."}
               </p>
             </div>
           </form>

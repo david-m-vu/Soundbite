@@ -6,13 +6,17 @@ import Playlist from "../models/Playlist.js";
 
 export const askGPT = async (req, res) => {
     const {
-        activity,
+        theme,
+        songs,
+        artists,
+        genre,
         duration,
         userResponse // for future chat functionality
     } = req.body;
     
+    // get the list of songs to connect to spotify later
     const openAI = new OpenAI(process.env.OPENAI_API_KEY);
-    const recommendation = await openAI.getPlaylistRecommendation(activity, duration, 1, userResponse);
+    const recommendation = await openAI.getPlaylistRecommendation(theme, songs, artists, genre, duration, 1, userResponse);
     res.status(200).json({context: recommendation});
 }
 
@@ -24,10 +28,11 @@ export const generateRecPlaylist = async (req, res) => {
     const tracks = await getTracks(spotifyToken, recommendationsList);
     const userID = await getUserID(spotifyToken);
 
-
+    // save playlist on spotify and save id and uri
     const [playlistID, playlistURI] = await createPlaylist(spotifyToken, userID, `${playlistName} (gpt generated)`);
     await updatePlaylist(spotifyToken, playlistID, tracks);
 
+    // save playlist to database and return it to the client
     const { id } = req.params;
     const user = await User.findById(id);
 
@@ -37,6 +42,7 @@ export const generateRecPlaylist = async (req, res) => {
         uri: playlistURI,
         tracks: tracks
     })
+    
     await newPlaylist.save();
     user.playlists.push(newPlaylist);
 

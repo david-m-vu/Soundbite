@@ -1,17 +1,34 @@
 .WebPlayback {
-    margin: 10px;
+    font-size: 34px;
 }
 
 .main-wrapper {
     display: flex;
-    
     justify-content: center;
     align-items: center;
     text-align: center;
     color: white;
+    gap: 15px;
+}
+
+.playButton, .pauseButton {
+    height: 96px;
+    width: 96px;
+}
+
+.playButton:hover, .pauseButton:hover {
+    cursor: pointer;
 }
 
 .now-playing__cover {
-    height: 150px;
-    width: 150px;
+    height: 96px;
+    width: 96px;
+}
+
+.now-playing__name {
+    font-weight: 700
+}
+
+.now-playing__artist {
+
 }

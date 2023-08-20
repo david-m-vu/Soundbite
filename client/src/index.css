@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@500;700&family=Rubik:wght@400;500;700&display=swap');
 
 html,
 body,
@@ -8,9 +8,9 @@ body,
   width: 100%;
   margin: 0;
   padding: 0;
-  font-family: "Rubik", "sans-serif";
+  font-family: "Honken Grotesk", sans-serif;;
 }
 
-h1, p {
+h1, h3, p {
   margin: 0px;
 }

@@ -18,6 +18,9 @@ export const authSlice = createSlice({
             state.user = null;
             state.token = null;
         },
+        setSpotifyToken: (state, action) => {
+            state.user.spotifyToken = action.payload.spotifyToken
+        },
         setPlaylists: (state, action) => {
             state.user.playlists = action.payload.playlists;
         },
@@ -33,5 +36,5 @@ export const authSlice = createSlice({
     }
 })
 
-export const { setLogin, setLogout, setPlaylists, setPlaylist } = authSlice.actions;
+export const { setLogin, setLogout, setSpotifyToken, setPlaylists, setPlaylist } = authSlice.actions;
 export default authSlice.reducer;

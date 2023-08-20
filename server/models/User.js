@@ -2,7 +2,7 @@ import mongoose from "mongoose"
 
 const UserSchema = new mongoose.Schema(
     {
-        firstName: {
+        username: {
             type: String,
             required: true,
             min: 2,
@@ -20,6 +20,10 @@ const UserSchema = new mongoose.Schema(
             min: 5
         },
         location: String,
+        isFirstTimeUser: {
+            type: Boolean,
+            default: true
+        },
         playlists: {
             type: Array,
             default: []

@@ -1,14 +1,12 @@
 .Playlist {
     height: 100%;
     color: white;
-    padding: 20px;
     overflow-y: scroll;
 }
 
 .inactiveTrack, .activeTrack {
     display: flex;
-    margin: 5px;
-    justify-content: space-between;
+
 }
 
 .inactiveTrack:hover {
@@ -19,19 +17,46 @@
     background-color: rgba(255, 255, 255, 0.2);
 }
 
+.activeTrack > .songInfo .artistInfo {
+    color: #adfca9;
+}
+
 
 .songInfo {
     display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    padding: 10px;
 }
+
 .songInfo > img {
     width: 80px;
     height: 80px;
-    padding: 10px;
 }
 
 
 .trackInfo {
-    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    white-space: nowrap;
+}
+
+.artistInfo {
+    font-size: 34px;
+    font-weight: 700;
+    line-height: normal;
+}
+
+.songNameInfo {
+    font-size: 34px;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.songBreak {
+    margin: 10px 0;
 }
 
 .play {

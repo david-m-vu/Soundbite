@@ -1,0 +1,103 @@
+.PlayArea {
+    display: grid;
+    grid-template-areas: 
+        "functions playing"
+        "playlists songs";
+    
+    grid-template-rows: 23.42% 1fr;
+    grid-template-columns: 488px 1fr;
+    margin: 0 clamp(0px, 3.47vw, 50px);
+    gap: 2px;
+    height: 100%;
+    color: white;
+    background-color: #ADFCA9;
+  }
+
+  .functions {
+    grid-area: functions;
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: 3.83vh 0;
+    background-color: #001FF3;
+  }
+
+  .createPlaylistButton {
+    font-size: 34px;
+    font-weight: 700;
+  }
+  
+  .createPlaylistButton:hover {
+    cursor: pointer;
+  }
+
+  .playlistList {
+    grid-area: playlists;
+    background-color: #001FF3;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 3.12vh clamp(0px, 3.47vw, 50px) 0 0;
+    gap: 40px;
+    overflow: scroll;
+  }
+
+  .playlistListItem {
+    display: flex;
+    position: relative;
+    width: 100%;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 20px;
+    
+  }
+
+
+  .playlistListItem > p {
+    font-size: 44px;
+  }
+
+  .inactivePlaylistLabel {
+    color: white;
+  }
+
+  .activePlaylistLabel {
+    color: #ADFCA9;
+  }
+
+  .playlistListItem > p:hover {
+    cursor: pointer;
+    color: #ADFCA9;
+
+  }
+
+  .deletePlaylistButton {
+    width: 32px;
+    height: 32px;
+  }
+
+  .deletePlaylistButton:hover {
+    cursor: pointer;
+  }
+
+  .playback {
+    grid-area: playing;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-end;
+    background-color: #001FF3;
+    padding: 1.78vh 3.47vw;
+  }
+
+  .playlistTracks {
+    grid-area: songs;
+    padding: 32px 0 32px 52px;
+    height: 100%;
+    overflow-y: scroll;
+    background-color: #001FF3;
+  }
+
+  .filler {
+    background-color: #001FF3;
+  }

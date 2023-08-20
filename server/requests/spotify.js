@@ -1,5 +1,7 @@
-const spotifyBaseURL = "https://api.spotify.com/v1";
 import fetch from "node-fetch";
+import { v4 as uuidv4 } from "uuid";
+
+const spotifyBaseURL = "https://api.spotify.com/v1";
 
 export const getTracks = async (access_token, songList) => {  
     let tracks = [];
@@ -18,7 +20,7 @@ export const getTracks = async (access_token, songList) => {
                 let artist = responseJSON.tracks.items[0].artists[0].name;
                 let uri = responseJSON.tracks.items[0].uri;
 
-                tracks.push({cover, trackName, artist, uri});
+                tracks.push({id: uuidv4(), cover, trackName, artist, uri});
             }
 
         } catch (err) {
@@ -71,11 +73,13 @@ export const createPlaylist = async (access_token, userID, playlistName) => {
 
 export const updatePlaylist = async (access_token, playlistID, tracksInfo) => {
     try {
+        tracksInfo = tracksInfo.slice(0, 100);
+        console.log(tracksInfo.length);
         let response = await fetch(`${spotifyBaseURL}/playlists/${playlistID}/tracks`, {
             method: "PUT",
             body: JSON.stringify({
-                uris: tracksInfo.map((info) => {
-                    return info.uri;
+                uris: tracksInfo.map((track) => {
+                    return track.uri;
                 })
             }),
             headers: {
