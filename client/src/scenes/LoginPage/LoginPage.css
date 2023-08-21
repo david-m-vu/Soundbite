@@ -1,78 +1,73 @@
 .LoginPage {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  color: white;
-  text-align: center;
-}
-
-.form {
+    height: 100%;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    align-items: flex-start;
+    color: white;
     text-align: center;
+    margin: 2rem 0;
     overflow: scroll;
 }
 
-.registerForm, .loginForm {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
+.form {
+    margin: auto;
+    overflow: hidden;
+}
+
+.registerForm,
+.loginForm {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
 
 .selection {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
 }
 
 .formInput {
-  text-align: center;
-  color: #ADFCA9;
-  background-color: rgba(0, 0, 0, 0);
-  outline: none;
-  border: none;
-  font-size: 54px;
-  transition: font-size 0.2s ease-in, margin-bottom 0.2s ease-in;
+    text-align: center;
+    color: #adfca9;
+    background-color: rgba(0, 0, 0, 0);
+    outline: none;
+    border: none;
+    font-size: 3.375rem;
+    transition: font-size 0.2s ease-in, margin-bottom 0.2s ease-in;
 }
 
 .formInput:focus {
-  font-size: 84px;
-  margin-bottom: 20px;
+    font-size: 5.25rem;
+    margin-bottom: 20px;
 }
 
-
 ::placeholder {
-  color: white;
-  opacity: 0.2;
-  font-weight: 700;
+    color: white;
+    opacity: 0.2;
+    font-weight: 700;
 }
 
 .errorMessage {
-  color: #fca9ad
+    color: #fca9ad;
 }
 
 .submitButton {
-  font-size: 42px;
-  padding: 15px 50px;
-  margin: 72px 0 20px 0;
+    font-size: 2.625rem;
+    padding: 15px 50px;
+    margin: 72px 0 20px 0;
 }
 
 .switchForm {
-  display: flex;
-  justify-content: center;
+    display: flex;
+    justify-content: center;
 }
 
 .changeFormTypeButton {
-  color: #ADFCA9;
+    color: #adfca9;
 }
 
 .changeFormTypeButton:hover {
     cursor: pointer;
     color: rgb(91, 155, 87);
     text-decoration: underline;
-    
 }
-

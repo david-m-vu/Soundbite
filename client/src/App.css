@@ -5,19 +5,19 @@
 }
 
 .inputLabel {
-    font-size: 34px;
+    font-size: 2.125rem;
     font-weight: 500;
     margin: 0;
     padding: 0;
   }
 
 .nextButton {
-  font-size: 42px;
+  font-size: 2.625rem;
   padding: 15px 50px;
 }
 
 .disabledNextButton {
-  font-size: 42px;
+  font-size: 2.625rem;
   padding: 15px 50px;
   background-color: transparent;
   outline: none;
@@ -53,3 +53,60 @@
   -ms-user-select: none;
   user-select: none;
 }
+
+@media screen and (max-width: 884px) {
+  html {
+      font-size: 80%;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  html {
+      font-size: 70%;
+  }
+  .switchForm {
+    font-size: 2.125rem;
+  }
+  body .userInfo{
+    font-size: 2.125rem;
+  }
+
+  body .options {
+    font-size: 2.125rem;
+    gap: 0.8864167rem;
+    top: 3.6302083rem;
+  }
+
+  body .skipButton, body .disabledSkipButton {
+    font-size: 2.125rem;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  html {
+      font-size: 60%;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  html {
+      font-size: 50%;
+  }
+  .errorMessage {
+      font-size: 2.125rem
+  }
+}
+
+@media screen and (max-width: 426px) {
+  html {
+      font-size: 40%;
+  }
+
+}
+
+@media screen and (max-width: 340px) {
+  html {
+      font-size: 35%;
+  }
+}
+

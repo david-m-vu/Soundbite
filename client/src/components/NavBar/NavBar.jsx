@@ -35,9 +35,9 @@ const NavBar = (props) => {
 
   return (
     <div className="NavBar">
-      <img className="logo" alt="BACH" src={logo} onClick={() => navigate("/main")}/>
+      <img className="logo" alt="BACH" src={logo} onClick={() => (location.pathname !== "/connect") && navigate("/main")}/>
       <div className="sessionData">
-        {(location.pathname !== "/login" && location.pathname !== "/connect") && <button className="standardButton" onClick={() => navigate("/connect")}>{decideSpotifyConnectMessage()}</button>}
+        {(location.pathname !== "/login" && location.pathname !== "/connect") && <button className=" redirectConnectButton standardButton" onClick={() => navigate("/connect")}>{decideSpotifyConnectMessage()}</button>}
         <p
           onClick={() => setShowOptions((prev) => !prev)}
           className="userInfo unselectable"

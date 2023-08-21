@@ -27,7 +27,7 @@ const Playlist = (props) => {
         <div className="Playlist">
             {props.activePlaylist.tracks.map((track, index) => {
                 return (
-                    <div key={`${index}: ${track.uri}`}>
+                    <div className="songSection" key={`${index}: ${track.uri}`}>
                         <div
                             className={getTrackClassName(track.id)}
                             onClick={() => handleClickSong(index, track.id)}

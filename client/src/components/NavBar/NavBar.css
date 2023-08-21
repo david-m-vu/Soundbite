@@ -1,20 +1,27 @@
 .NavBar {
     display: flex;
-    width: calc(100% - 100px);
+    width: calc(100% - 6.25rem);
     justify-content: space-between;
+    align-items: center;
     position: absolute;
-    top: 30px;
-    left: 50px;
+    top: 1.875rem;
+    left: 3.125rem;
     border: none;
   }
 
   .sessionData {
     display: flex;
+    align-items: center;
     gap: 20px;
+  }
+
+  .redirectConnectButton {
+    font-size: 1.5rem;
+    padding: 0.548781157rem 1.37195289rem;
   }
   
   .userInfo {
-    font-size: 24px;
+    font-size: 1.5rem;
     font-weight: 700;
     z-index: 2;
   }
@@ -28,16 +35,20 @@
     display: flex;
     flex-direction: column;
     align-items: flex-end;
-    gap: 10px;
-    font-size: 24px;
+    gap: 0.625rem;
+    font-size: 1.5rem;
     right: 0px;
-    top: 41px;
+    top: 2.5625rem;
     animation: open 0.2s ease 1;
     z-index: 1;
   }
   
   .toSignIn:hover {
     cursor: pointer;
+  }
+
+  .logo {
+    max-width: 10rem;
   }
 
   .logo:hover {

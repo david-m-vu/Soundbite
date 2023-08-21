@@ -88,13 +88,13 @@
 
 .loadingMessage {
     position: relative;
-    font-size: 64px;
+    font-size: 4rem;
     font-weight: 700px;
 }
 
 .elipses {
     position: absolute;
-    font-size: 64px;
+    font-size: 4rem;
     font-weight: 700px;
     left: 100%;
     top: 0px;

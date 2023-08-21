@@ -14,3 +14,8 @@ body,
 h1, h3, p {
   margin: 0px;
 }
+
+::-webkit-scrollbar {
+  width: 0px;
+  background: transparent;
+}

@@ -4,8 +4,8 @@
         "functions playing"
         "playlists songs";
     
-    grid-template-rows: 23.42% 1fr;
-    grid-template-columns: 488px 1fr;
+    grid-template-rows: clamp(10%, 20vh, 23.42%) 1fr;
+    grid-template-columns: clamp(10%, 30vw, 25rem) 1fr;
     margin: 0 clamp(0px, 3.47vw, 50px);
     gap: 2px;
     height: 100%;
@@ -19,12 +19,12 @@
     flex-direction: column-reverse;
     align-items: flex-start;
     justify-content: flex-start;
-    padding: 3.83vh 0;
+    padding: 3.83vh 1rem 3.83vh 0;
     background-color: #001FF3;
   }
 
   .createPlaylistButton {
-    font-size: 34px;
+    font-size: 2.125rem;
     font-weight: 700;
   }
   
@@ -39,8 +39,8 @@
     flex-direction: column;
     align-items: center;
     padding: 3.12vh clamp(0px, 3.47vw, 50px) 0 0;
-    gap: 40px;
-    overflow: scroll;
+    gap: 2.5rem;
+    overflow-y: scroll;
   }
 
   .playlistListItem {
@@ -49,13 +49,12 @@
     width: 100%;
     justify-content: flex-start;
     align-items: center;
-    gap: 20px;
-    
+    text-overflow: ellipsis;
   }
 
 
   .playlistListItem > p {
-    font-size: 44px;
+    font-size: 2.75rem;
   }
 
   .inactivePlaylistLabel {
@@ -73,8 +72,13 @@
   }
 
   .deletePlaylistButton {
-    width: 32px;
-    height: 32px;
+    display: flex;
+    align-items: center;
+  }
+
+  .deletePlaylistButton > img{
+    width: 2rem;
+    height: 2rem;
   }
 
   .deletePlaylistButton:hover {
@@ -92,8 +96,9 @@
 
   .playlistTracks {
     grid-area: songs;
-    padding: 32px 0 32px 52px;
+    padding: 2rem 0 2rem 3.25rem;
     height: 100%;
+    width: calc(100% - 3.25rem);
     overflow-y: scroll;
     background-color: #001FF3;
   }
