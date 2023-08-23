@@ -37,14 +37,6 @@ const UserSchema = new mongoose.Schema(
             type: Boolean,
             default: false
         },
-        usedAPI: {
-            type: Number,
-            default: 0
-        },
-        endDate: {
-            type: Date,
-            default: null
-        },
     },
     { timestamps: true }
 );
