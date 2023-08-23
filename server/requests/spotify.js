@@ -19,8 +19,9 @@ export const getTracks = async (access_token, songList) => {
                 let trackName = responseJSON.tracks.items[0].name;
                 let artist = responseJSON.tracks.items[0].artists[0].name;
                 let uri = responseJSON.tracks.items[0].uri;
+                let id = responseJSON.tracks.items[0].id;
 
-                tracks.push({id: uuidv4(), cover, trackName, artist, uri});
+                tracks.push({uid: uuidv4(), id, cover, trackName, artist, uri});
             }
 
         } catch (err) {

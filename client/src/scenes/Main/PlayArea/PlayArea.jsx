@@ -11,11 +11,20 @@ import { setPlaylists } from "../../../state/index.js";
 // const backendBaseURL = "https://soundbite-backend.onrender.com";
 const backendBaseURL = "http://localhost:3001";
 
+const track = {
+    name: "",
+    album: {
+        images: [{ url: "" }],
+    },
+    artists: [{ name: "" }],
+};
+
 const PlayArea = (props) => {
   const [activePlaylist, setActivePlaylist] = useState(null); // element of playlists
+  const [playlistPlaying, setPlaylistPlaying] = useState(null); 
   const [activePlaylistIndex, setActivePlaylistIndex] = useState(-1);
-  const [activeSongID, setActiveSongID] = useState("")
   const [deviceID, setDeviceID] = useState("");
+  const [currentTrack, setCurrentTrack] = useState(track); // from spotify webplayer
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -83,6 +92,8 @@ const PlayArea = (props) => {
           <WebPlayback
             token={props.user.spotifyToken}
             setDeviceID={setDeviceID}
+            currentTrack={currentTrack}
+            setCurrentTrack={setCurrentTrack}
           />
         )}
       </div>
@@ -92,9 +103,10 @@ const PlayArea = (props) => {
           <Playlist
             token={props.user.spotifyToken}
             activePlaylist={activePlaylist}
-            activeSongID={activeSongID}
-            setActiveSongID={setActiveSongID}
+            currentTrack={currentTrack}
             deviceID={deviceID}
+            playlistPlaying={playlistPlaying}
+            setPlaylistPlaying={setPlaylistPlaying}
           />
         </div> : <div className="filler"/>
       }

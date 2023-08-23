@@ -4,6 +4,8 @@ import { useState, useEffect } from "react";
 import { generateGPTRecPlaylist } from "../../requests/recommendations.js";
 import { setPlaylists } from "../../state/index.js";
 import { useNavigate } from "react-router";
+import { refreshToken } from "../../requests/spotify.js";
+import { setSpotifyToken } from "../../state/index.js";
 
 import NavBar from "../../components/NavBar/NavBar.jsx";
 
@@ -93,6 +95,24 @@ const Create = (props) => {
     };
 
     const handleSubmitGPTInput = async () => {
+        if (props.token) {
+            let refresh_token = props.user.spotifyToken.refresh_token;
+            let new_access_token = await refreshToken(refresh_token);
+            
+            dispatch(
+                setSpotifyToken({
+                    spotifyToken: {
+                        access_token: new_access_token,
+                        refresh_token,
+                        dateInitialized: Date.now(),
+                    },
+                })
+            );
+
+        } else {
+            navigate("/connect");
+        }
+        
         setIsLoading(true);
         let inputsObj = {
             playlistName: playlistNameInput,
@@ -105,7 +125,7 @@ const Create = (props) => {
         let newPlaylist = await generateGPTRecPlaylist(
             props.user._id,
             props.token,
-            props.user.spotifyToken,
+            props.user.spotifyToken.access_token,
             inputsObj
         );
 
@@ -113,6 +133,10 @@ const Create = (props) => {
         //   setActivePlaylistIndex(props.user.playlists.length);
         setThemeInput("");
         setDurationInput("");
+        setPlaylistNameInput("");
+        setSongsInput("");
+        setArtistsInput("");
+        setGenreInput("");
 
         dispatch(
             setPlaylists({
