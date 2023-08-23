@@ -7,7 +7,7 @@ import { useDispatch } from "react-redux";
 import { setLogin } from "../../state/index.js";
 import NavBar from "../../components/NavBar/NavBar.jsx";
 
-const authBaseURL = "http://localhost:3001/auth";
+const authBaseURL = `${process.env.REACT_APP_BACKEND_BASE_URL}/auth`;
 
 const registerSchema = yup.object().shape({
   username: yup.string().required("required"),

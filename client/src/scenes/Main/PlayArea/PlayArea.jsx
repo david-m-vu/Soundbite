@@ -8,8 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setPlaylists } from "../../../state/index.js";
 
-// const backendBaseURL = "https://soundbite-backend.onrender.com";
-const backendBaseURL = "http://localhost:3001";
+const backendBaseURL = process.env.REACT_APP_BACKEND_BASE_URL;
 
 const track = {
     name: "",

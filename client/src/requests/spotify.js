@@ -1,6 +1,5 @@
 const spotifyBaseURL = "https://api.spotify.com/v1";
-const backendBaseURL = "http://localhost:3001";
-
+const backendBaseURL = process.env.REACT_APP_BACKEND_BASE_URL;
 
 // export const savePlaylist = async (access_token, tracks) => {
 

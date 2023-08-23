@@ -1,5 +1,4 @@
-// const backendBaseURL = "https://soundbite-backend.onrender.com"
-const backendBaseURL = "http://localhost:3001";
+const backendBaseURL = process.env.REACT_APP_BACKEND_BASE_URL;
 
 export const generateGPTRecPlaylist = async (userID, token, spotifyToken, inputsObj) => {    
     const { playlistName, theme, songs, artists, genre, duration } = inputsObj;
