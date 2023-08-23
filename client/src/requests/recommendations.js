@@ -26,7 +26,6 @@ export const generateGPTRecPlaylist = async (userID, token, spotifyToken, inputs
         headers: {
             "Content-Type": "application/json",
             "Authorization": `Bearer ${token}`,
-            "Access-Control-Allow-Origin": `${process.env.REACT_APP_BACKEND_BASE_URL}`,
         },
         body: JSON.stringify({
             recommendation: gptRec,
