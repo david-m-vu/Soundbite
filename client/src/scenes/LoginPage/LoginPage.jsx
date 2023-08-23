@@ -48,6 +48,8 @@ const LoginPage = () => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": `${process.env.REACT_APP_BACKEND_BASE_URL}`,
+
       },
       body: JSON.stringify(values),
     });
