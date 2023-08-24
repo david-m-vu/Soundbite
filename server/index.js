@@ -36,7 +36,6 @@ app.use("/assets", express.static(path.join(__dirname, "public/assets")));
 //     return next();
 // });
 
-
 /* ROUTES */
 app.use("/spotify", spotifyAuthRoutes);
 app.use("/recommendations", recommendationsRoutes);

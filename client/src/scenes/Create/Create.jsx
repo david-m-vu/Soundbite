@@ -179,7 +179,7 @@ const Create = (props) => {
                                 htmlFor="namePlaylistInput"
                                 className="inputLabel"
                             >
-                                Create your first playlist
+                                Create your playlist
                             </label>
                             <input
                                 id="namePlaylistInput"

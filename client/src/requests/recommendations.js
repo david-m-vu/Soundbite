@@ -2,7 +2,7 @@ const backendBaseURL = process.env.REACT_APP_BACKEND_BASE_URL;
 
 export const generateGPTRecPlaylist = async (userID, token, spotifyToken, inputsObj) => {    
     const { playlistName, theme, songs, artists, genre, duration } = inputsObj;
-    console.log(inputsObj);
+    
     const gptResponse = await fetch(`${backendBaseURL}/recommendations/ask`, {
         method: "POST",
         headers: {

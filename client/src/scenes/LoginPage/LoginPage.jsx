@@ -43,9 +43,7 @@ const LoginPage = () => {
     // for (let value in values) {
     //   formData.append(value, values[value]);
     // }
-
-    console.log(values);
-
+    
     const savedUserResponse = await fetch(`${authBaseURL}/register`, {
       method: "POST",
       headers: {
