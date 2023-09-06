@@ -47,8 +47,7 @@ export const getAccessToken = async (req, res) => {
         if (response.ok) {
             let responseJSON = await response.json();
             let { access_token, refresh_token } = responseJSON;
-            console.log(responseJSON);
-
+            
             res.redirect(`${process.env.CLIENT_URL}/connect?access_token=${encodeURIComponent(access_token)}&refresh_token=${encodeURIComponent(refresh_token)}`);
         }
 

@@ -28,14 +28,6 @@ app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
 app.use(cors({origin: `${process.env.CLIENT_URL}`, credentials: true}));
 app.use("/assets", express.static(path.join(__dirname, "public/assets")));
 
-// middleware for cors issue
-// app.use((req, res, next) => {
-//     res.set("Access_Control-Allow-Origin", "*");
-//     res.set("Access_Control-Allow-Methods", 'PUT,POST,GET,DELETE,OPTIONS');
-//     res.set("Access_Control-Allow-Headers", 'Origin, X-Requested-With, Content-Type, Accept');
-//     return next();
-// });
-
 /* ROUTES */
 app.use("/spotify", spotifyAuthRoutes);
 app.use("/recommendations", recommendationsRoutes);
