@@ -1,4 +1,6 @@
 # Bach
 Personalized Playlists with AI
 
-Note: Doesn't work on Safari browser
+Notes: 
+* Doesn't work on Safari browser
+* Requires Spotify Premium for in-app playback
