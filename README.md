@@ -1,1 +1,2 @@
-# Soundbite
+# Bach
+Personalized Playlists with AI
