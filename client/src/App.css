@@ -1,7 +1,13 @@
 .App {
-  background-color: #001ff3;
+  background-color: #240003;
   color: #ffffff;
   overflow: hidden;
+}
+
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .inputLabel {

@@ -1,11 +1,17 @@
 .LoginPage {
-    height: calc(100% - 2rem);
-    display: flex;
-    align-items: flex-start;
+    height: 100%;
+    display: grid;
+    grid-template-columns: 49.3125rem 1fr;
     color: white;
     text-align: center;
-    margin: 2rem 0;
-    overflow-y: scroll;
+}
+
+.loginSection {
+    background-color: #240003
+}
+
+.loginImage {
+
 }
 
 .form {
