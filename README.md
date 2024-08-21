@@ -1,4 +1,4 @@
-# Bach
+# Soundbite
 Personalized Playlists with AI
 
 Notes: 
